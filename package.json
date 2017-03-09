@@ -1,0 +1,19 @@
+{
+  "name": "buscadornode",
+  "version": "1.0.0",
+  "description": "buscador con nodejs",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "fs": "^0.0.1-security",
+    "jsonfile": "^2.4.0",
+    "nodemon": "^1.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

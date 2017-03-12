@@ -1,9 +1,11 @@
 var express=require('express');
 var app = express();
 var server= require('http').Server(app);
+//var bodyParser = require('body-parser');
 
 
-app.use(express.static(__dirname + '/js'));
+app.use(express.static(__dirname + '/public/js'));
+app.use(express.static(__dirname + '/public/img'));
 
 app.get('/',function(req,res){
 	res.sendfile(__dirname + '/public/index.html');
@@ -29,32 +31,68 @@ for (var i = 0; i < jd.length; ++i) {
 	casas.push(new casa(jd[i].Id,jd[i].Direccion,jd[i].Ciudad,jd[i].Telefono,jd[i].Codigo_Postal,jd[i].Tipo,jd[i].Precio));
 }
 
-// Get all Vehicles
-var getCasas = function (callback) {
-    callback(null, casas);
+var getCasas = function (data) {
+    return data;
 };
 
+var getCasasByCiudad = function (ciudad,data) {
+    var filteredCasas = [];
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].Ciudad.toUpperCase() === ciudad.toUpperCase()) {
+            filteredCasas.push(data[i]);
+        }
+    }
+    return filteredCasas;
+};
 
-var router = express.Router();
-/* GET home page. */
-router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Express' });
+var getCasasByTipo = function (tipo,data) {
+    var filteredCasas = [];
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].Tipo.toUpperCase() === tipo.toUpperCase()) {
+            filteredCasas.push(data[i]);
+        }
+    }
+    return filteredCasas;
+};
+
+var getCasasByFiltros = function (tipo,ciudad,data) {
+    var filteredCasas = [];
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].Tipo.toUpperCase() === tipo.toUpperCase() && data[i].Ciudad.toUpperCase() === ciudad.toUpperCase()) {
+            filteredCasas.push(data[i]);
+        }
+    }
+    return filteredCasas;
+};
+
+app.get('/test', function(req, res, next) {
+	var datos;
+	var chk=req.query.chk;
+	var ciudad=req.query.ciudad;
+	var tipo=req.query.tipo;
+
+	console.log(tipo);
+	if(chk=="true"){
+		if(tipo!="0" && ciudad!="0"){
+			datos=getCasasByFiltros(tipo,ciudad,casas);
+		}else if(tipo!="0"){
+			console.log("busca tipo");
+			datos=getCasasByTipo(tipo,casas);
+		}else if(ciudad!="0"){
+			datos=getCasasByCiudad(ciudad,casas);
+		}else{
+			datos=getCasas(casas);
+		}
+		
+
+	}else{
+		datos=getCasas(casas);
+	}
+	
+ 	res.send(datos);
+	
 });
- 
 
-/*
-for (var i = 0; i < jsonData.length; ++i) {
-
-	console.log("Emp ID : "+jsonData[i].Id);
-	console.log("Emp Name : "+jsonData[i].Direccion);
-	console.log("Emp Address : "+jsonData[i].Ciudad);
-	console.log("Designation : "+jsonData[i].Telefono);
-	console.log("----------------------------------");
-}
-
-*/
-
-
-server.listen(80,function(){
+server.listen(8090,function(){
 	console.log("el servidor arranco en puerto 80",app.settings.env);
 });

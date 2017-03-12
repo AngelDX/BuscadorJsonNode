@@ -4,16 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
   <title>Buscador</title>
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-  <link rel="stylesheet" href="ion.rangeSlider.css">
-  <link rel="stylesheet" href="ion.rangeSlider.skinFlat.css">
-  <script src="ion.rangeSlider.min.js"></script>
+  
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
-#{title}
   <div class="navbar-fixed">
     <nav>
       <div class="blue darken-3 nav-wrapper center-align">
@@ -35,17 +34,17 @@
               </label>
             </div>
             <!--  Busqueda personalizada -->
-            <div class="row invisible" id="personalizada">
+            <div id="personalizada">
                 <div class="row">
                   Ciudad:
-                  <select id="ciudad">
-                    <option value="" selected>Escoge una ciudad</option>
+                  <select id="selectCiudad" class="browser-default">
+                    <option value="0" selected>Escoge una ciudad</option>
                   </select>
                 </div>
                 <div class="row">
                   Tipo:
-                  <select id="tipo">
-                    <option value="" selected>Escoge un tipo</option>
+                  <select id="selectTipo" class="browser-default">
+                    <option value="0" selected>Escoge un tipo</option>
                   </select>
                 </div>
                 <div class="row">
@@ -59,41 +58,14 @@
         </div>
       </div>
       <div class="col m8 lista">
-        <!-- Property
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="images/home.jpg">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <div>
-                <b>Direccion: </b><p></p>
-              </div>
-              <div>
-                <b>Ciudad: </b><p></p>
-              </div>
-              <div>
-                <b>Telefono: </b><p></p>
-              </div>
-              <div>
-                <b>Código postal: </b><p></p>
-              </div>
-              <div>
-                <b>Precio: </b><p></p>
-              </div>
-              <div>
-                <b>Tipo: </b><p></p>
-              </div>
-            </div>
-            <div class="card-action right-align">
-              <a href="#">Ver más</a>
-            </div>
-          </div>
-        </div>
-        -->
+        <div id="resultados" class="resultados"></div>
       </div>
+      
     </div>
-
   <script src="app.js"></script>
+  <script src="jquery-3.1.1.min.js"></script>
 </body>
 </html>
+<script>
+
+</script>
